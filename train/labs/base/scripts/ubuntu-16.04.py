@@ -8,6 +8,15 @@ FQDN="{fqdn}"
 # hostname
 hostnamectl set-hostname $FQDN
 
+# Change default passwor to "docker"
+echo "ubuntu:docker" | chpasswd
+
+# Allow password authentication
+sed -i 's|[#]*ChallengeResponseAuthentication no|ChallengeResponseAuthentication yes|g' /etc/ssh/sshd_config
+
+# Restart SSH service
+service ssh restart
+
 {dinfo}
 '''
 
@@ -18,3 +27,4 @@ def pre_process():
 def post_process():
     """Anything added to this function is executed after launching the instances"""
     pass
+
