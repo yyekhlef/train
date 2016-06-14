@@ -3,6 +3,7 @@
 
 # prompts
 # ubuntu_pass = raw_input("Enter password for 'ubuntu' user: ")
+ubuntu_pass = "docker"
 
 # scripts
 PRIMARY_OS = 'Ubuntu-14.04'
