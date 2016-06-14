@@ -3,6 +3,7 @@
 
 # prompts
 # ubuntu_pass = raw_input("Enter password for 'ubuntu' user: ")
+
 ubuntu_pass = "docker"
 
 # scripts
@@ -29,15 +30,15 @@ sed -i 's|[#]*ChallengeResponseAuthentication no|ChallengeResponseAuthentication
 service ssh restart
 
 # docker os release
-curl -sSL https://get.docker.com/ | sh
+# curl -sSL https://get.docker.com/ | sh
 
 # docker cs release
-#wget -qO- 'https://pgp.mit.edu/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | sudo apt-key add --import
-#apt-get update
-#apt-get install -y apt-transport-https
-#echo "deb https://packages.docker.com/1.9/apt/repo ubuntu-trusty main" | tee /etc/apt/sources.list.d/docker.list
-#apt-get update
-#apt-get install -y docker-engine
+wget -qO- 'https://pgp.mit.edu/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | sudo apt-key add --import
+apt-get update
+apt-get install -y apt-transport-https
+echo "deb https://packages.docker.com/1.9/apt/repo ubuntu-trusty main" | tee /etc/apt/sources.list.d/docker.list
+apt-get update
+apt-get install -y docker-engine
 
 usermod -aG docker ubuntu
 
@@ -51,31 +52,31 @@ curl -L https://github.com/docker/compose/releases/download/1.6.0/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
 # password authentication
-echo ubuntu:{0} | chpasswd
-sed -i 's|[#]*PasswordAuthentication no|PasswordAuthentication yes|g' /etc/ssh/sshd_config
-service ssh restart
+# echo ubuntu:{0} | chpasswd
+# sed -i 's|[#]*PasswordAuthentication no|PasswordAuthentication yes|g' /etc/ssh/sshd_config
+# service ssh restart
 
 # cleanup.sh
 # ==========
-cat >/home/ubuntu/cleanup.sh <<EOL
+#cat >/home/ubuntu/cleanup.sh <<EOL
 #!/bin/bash
 
-sudo service docker stop
+#sudo service docker stop
 
 # /etc/default/docker
-sudo rm /etc/default/docker
-sudo cp /etc/default/docker.bak /etc/default/docker
+#sudo rm /etc/default/docker
+#sudo cp /etc/default/docker.bak /etc/default/docker
 
-unset -v DOCKER_HOST
-unset -v DOCKER_OPTS
-unset -v DOCKER_CONTENT_TRUST
+#unset -v DOCKER_HOST
+#unset -v DOCKER_OPTS
+#unset -v DOCKER_CONTENT_TRUST
 
-sudo rm -r /var/lib/docker
-sudo service docker start
-EOL
+#sudo rm -r /var/lib/docker
+#sudo service docker start
+#EOL
 
-chmod +x /home/ubuntu/cleanup.sh
-chown ubuntu:ubuntu /home/ubuntu/cleanup.sh
+#chmod +x /home/ubuntu/cleanup.sh
+#chown ubuntu:ubuntu /home/ubuntu/cleanup.sh
 
 service docker stop
 rm -r /var/lib/docker
@@ -119,3 +120,4 @@ def pre_process():
 def post_process():
     """Executed after launching instances in AWS"""
     pass
+
