@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # prompts
-ubuntu_pass = raw_input("Enter password for 'ubuntu' user: ")
+# ubuntu_pass = raw_input("Enter password for 'ubuntu' user: ")
 
 # scripts
 PRIMARY_OS = 'Ubuntu-14.04'
@@ -19,6 +19,13 @@ sudo locale-gen en_US.UTF-8
 echo $FQDN > /etc/hostname
 service hostname restart
 sleep 5
+
+# password authentication
+echo "ubuntu:docker" | chpasswd
+sed -i 's|[#]*PasswordAuthentication no|PasswordAuthentication yes|g' /etc/ssh/sshd_config
+# Allow password authentication
+sed -i 's|[#]*ChallengeResponseAuthentication no|ChallengeResponseAuthentication yes|g' /etc/ssh/sshd_config
+service ssh restart
 
 # docker os release
 curl -sSL https://get.docker.com/ | sh
