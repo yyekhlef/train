@@ -103,6 +103,15 @@ echo $FQDN > /etc/hostname
 service hostname restart
 sleep 5
 
+# Change default passwor to "docker"
+echo "ubuntu:docker" | chpasswd
+
+# Allow password authentication
+sed -i 's|[#]*ChallengeResponseAuthentication no|ChallengeResponseAuthentication yes|g' /etc/ssh/sshd_config
+
+# Restart SSH service
+service ssh restart
+
 # docker
 {0}
 

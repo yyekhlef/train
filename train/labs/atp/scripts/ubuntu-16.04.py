@@ -17,6 +17,8 @@ sed -i 's|[#]*ChallengeResponseAuthentication no|ChallengeResponseAuthentication
 # Restart SSH service
 service ssh restart
 
+reboot
+
 # docker os release
 curl -sSL https://get.docker.com/ | sh
 
@@ -31,10 +33,11 @@ curl -sSL https://get.docker.com/ | sh
 usermod -aG docker ubuntu
 
 # compose
-curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
+#curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+#chmod +x /usr/local/bin/docker-compose
 
 {dinfo}
+reboot
 '''
 
 def pre_process():
