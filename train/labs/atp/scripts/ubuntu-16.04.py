@@ -17,8 +17,6 @@ sed -i 's|[#]*ChallengeResponseAuthentication no|ChallengeResponseAuthentication
 # Restart SSH service
 service ssh restart
 
-reboot
-
 # docker os release
 curl -sSL https://get.docker.com/ | sh
 
